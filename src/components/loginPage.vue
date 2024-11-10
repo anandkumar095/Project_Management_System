@@ -25,6 +25,8 @@
 </template>
 
 <script>
+///import { is } from 'core-js/core/object';
+
 export default {
   data() {
     return {
@@ -36,10 +38,11 @@ export default {
   methods: {
     login() {
       // Basic authentication
-      if (this.email === 'user' && this.password === 'password') {
+      if (this.email === 'user' && this.password === 'password' && this.isInstructor === false) {
         this.$router.push('/dashboard');
-      } else {
-        alert('Invalid username or password');
+      } 
+      else if (this.email === 'user' && this.password === 'password' && this.isInstructor === true){
+        this.$router.push('/instructor/1');
       }
     },
     forgotPassword() {
