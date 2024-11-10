@@ -11,7 +11,7 @@
             <a class="nav-link" @click="goToMyTeam">My Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Inbox</a>
+            <a class="nav-link" @click="goToInbox">Inbox</a>
           </li>
         </ul>
         <button class="btn btn-outline-danger my-2 my-sm-0" @click="logout">Logout</button>
