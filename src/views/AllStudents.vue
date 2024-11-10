@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <NavBar />
       <h1>All Students</h1>
       <table class="table">

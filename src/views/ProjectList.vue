@@ -1,7 +1,7 @@
 <template>
     
       
-      <div>
+      <div class="container">
         <NavBar />
         <div>
         <br>
@@ -10,8 +10,8 @@
         <p>View and manage student projects</p>
         <br>
         <input type="text" placeholder="Search projects..." v-model="searchQuery" />
-        <button @click="filterProjects">Filter Projects</button>
-        <button @click="createNewProject">Create New Project</button>
+        <button class="btn btn-primary mb-3" @click="filterProjects">Filter Projects</button>
+        <button class="btn btn-success mb-2" @click="createNewProject">Create New Project</button>
         <br>
         <table class="table">
           <thead>
@@ -35,8 +35,8 @@
         </table>
       
     </div>
-    <div>
-        <button @click="goBack">Back</button>
+    <div class="mt-3 text-center">
+        <button @click="goBack" class="btn btn-secondary">Back</button>
       </div>
 </div>
   </template>

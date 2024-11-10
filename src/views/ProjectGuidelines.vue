@@ -1,100 +1,105 @@
 <template>
-    <div class="document-guidelines">
-      <NavBar />
-      <section class="header">
-        <h2>Document Guidelines</h2>
-        <p>View and upload project guidelines</p>
-        <button class="upload-btn" @click="uploadGuidelines">Upload New Guidelines</button>
-      </section>
-  
-      <section class="uploaded-guidelines">
-        <h3>Uploaded Guidelines</h3>
-  
+  <div class="container">
+    <NavBar />
+    <div class="text-center mt-4">
+      <h1>Document Guidelines</h1>
+      <p>View and upload project guidelines</p>
+      <button class="btn btn-primary mb-3" @click="uploadGuidelines">Upload New Guidelines</button>
 
-        <div class="filter-bar">
-          <input
-            type="text"
-            v-model="searchQuery"
-            placeholder="Search guidelines"
-            class="search-input"
-          />
-          <select v-model="selectedProject" class="project-select">
-            <option v-for="project in projects" :key="project.id" :value="project.id">
-              {{ project.name }}
-            </option>
-          </select>
-          <span class="new-tag">NEW</span>
-        </div>
-        <div v-if="filteredGuidelines.length" class="guidelines-list">
-          <div
-            v-for="(guideline) in filteredGuidelines"
-            :key="guideline.id"
-            class="guideline-item"
-          >
-            <span>{{ guideline.name }}</span>
-            <button @click="viewGuideline(guideline)" class="view-btn">View</button>
-            <button @click="deleteGuideline(guideline.id)" class="delete-btn">Delete</button>
+      <h3>Uploaded Guidelines</h3>
+
+      <div class="d-flex justify-content-center mb-3">
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search guidelines"
+          class="form-control me-2"
+          style="max-width: 300px;"
+        />
+        <select v-model="selectedProject" class="form-select" style="max-width: 200px;">
+          <option v-for="project in projects" :key="project.id" :value="project.id">
+            {{ project.name }}
+          </option>
+        </select>
+        <button class="btn btn-success ms-2">NEW</button>
+      </div>
+
+      <div v-if="filteredGuidelines.length" class="list-group">
+        <div
+          v-for="(guideline) in filteredGuidelines"
+          :key="guideline.id"
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <span>{{ guideline.name }}</span>
+          <div>
+            <button @click="viewGuideline(guideline)" class="btn btn-info btn-sm me-2">View</button>
+            <button @click="deleteGuideline(guideline.id)" class="btn btn-danger btn-sm">Delete</button>
           </div>
         </div>
-        <p v-else>No guidelines found for the selected project.</p>
-      </section>
-      <div>
-        <button @click="goBack">Back</button>
+      </div>
+      <p v-else>No guidelines found for the selected project.</p>
+
+      <div class="mt-3 text-center">
+        <button @click="goBack" class="btn btn-secondary">Back</button>
       </div>
     </div>
+  </div>
+</template>
 
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        searchQuery: "",
-        selectedProject: null,
-        projects: [],
-      };
+<script>
+import NavBar from "@/components/NavBar.vue";
+
+export default {
+  components: {
+    NavBar,
+  },
+  data() {
+    return {
+      searchQuery: "",
+      selectedProject: null,
+      projects: [],
+    };
+  },
+  computed: {
+    filteredGuidelines() {
+      const selectedProject = this.projects.find(
+        (project) => project.id === this.selectedProject
+      );
+      if (!selectedProject) return [];
+      return selectedProject.guidelines.filter((g) =>
+        g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
-    computed: {
-      // Get the guidelines of the selected project and filter them based on the search query
-      filteredGuidelines() {
-        const selectedProject = this.projects.find(
-          (project) => project.id === this.selectedProject
-        );
-        if (!selectedProject) return [];
-        return selectedProject.guidelines.filter((g) =>
-          g.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      },
+  },
+  methods: {
+    uploadGuidelines() {
+      alert("Upload New Guidelines functionality is not yet implemented.");
     },
-    methods: {
-      uploadGuidelines() {
-        alert("Upload New Guidelines functionality is not yet implemented.");
-      },
-      viewGuideline(guideline) {
-        alert(`Viewing ${guideline.name}`);
-      },
-      deleteGuideline(guidelineId) {
-        const projectIndex = this.projects.findIndex(
-          (project) => project.id === this.selectedProject
-        );
-        if (projectIndex === -1) return;
-        const guidelineIndex = this.projects[projectIndex].guidelines.findIndex(
-          (g) => g.id === guidelineId
-        );
-        if (guidelineIndex !== -1) {
-          this.projects[projectIndex].guidelines.splice(guidelineIndex, 1);
-        }
-      },
-      goBack() {
-        this.$router.go(-1);
-      },
+    viewGuideline(guideline) {
+      alert(`Viewing ${guideline.name}`);
     },
-    mounted() {
-      // Set default project selection to the first project
-      if (this.projects.length > 0) {
-        this.selectedProject = this.projects[0].id;
+    deleteGuideline(guidelineId) {
+      const projectIndex = this.projects.findIndex(
+        (project) => project.id === this.selectedProject
+      );
+      if (projectIndex === -1) return;
+      const guidelineIndex = this.projects[projectIndex].guidelines.findIndex(
+        (g) => g.id === guidelineId
+      );
+      if (guidelineIndex !== -1) {
+        this.projects[projectIndex].guidelines.splice(guidelineIndex, 1);
       }
     },
-  };
-  </script>
-  <style></style>
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
+  mounted() {
+    if (this.projects.length > 0) {
+      this.selectedProject = this.projects[0].id;
+    }
+  },
+};
+</script>
+
+<style></style>

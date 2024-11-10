@@ -2,7 +2,7 @@
     <div>
       <NavBar />
   
-      <div>
+      <div class="container">
         <h1>Instructor Dashboard</h1>
         <br>
         <h2>Project Overview</h2>
@@ -23,7 +23,7 @@
               <td>{{ project.milestones }}</td>
               <td>
                 <button
-                  @click="returnbook(project.project_id, project.project_name)"
+                  @click="goProject(project.project_id, project.project_name)"
                   class="btn btn-primary mr-2"
                 >
                   Review Project
@@ -32,14 +32,15 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <div>
-        <button @click="goBack">Back</button>
+        <div class="mt-3 text-center">
+        <button @click="goBack" class="btn btn-secondary">Back</button>
       </div>
       <br>
       <br>
       <h2> Recent Activities</h2>
     </div>
+      </div>
+     
   </template>
   
   <script>
@@ -50,7 +51,11 @@
     },
     data() {
       return {
-        
+        projects: [
+           { id: 1, project_name: "Project Alpha", progress: 80, milestones: "8/10" },
+           { id: 2, project_name: "Project Beta", progress: 60, milestones: "6/10" }, 
+           { id: 3, project_name: "Project Gamma", progress: 90, milestones: "9/10" }, 
+           { id: 4, project_name: "Project Delta", progress: 75, milestones: "7/10" }, ],
       };
     },
     created() {
@@ -61,7 +66,9 @@
       goBack() {
         this.$router.go(-1);
       },
-      
+      goProject() {
+        this.$router.push('/projectguidelines/1');
+      },
       
     },
   };

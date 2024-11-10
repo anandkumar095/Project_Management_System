@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
       <NavBar />
       <br>
         <h2>Milestones</h2>
@@ -34,7 +34,7 @@
         <br>
         <h2>Document Guidelines</h2>
         <p>View and upload project guidelines</p>
-        <button @click="uploadNewGuideline" class="upload-btn">
+        <button class="btn btn-primary mb-3" @click="uploadNewGuideline" >
           Upload New Guidelines
         </button>
         
@@ -58,8 +58,8 @@
             <li v-if="!guidelines.length">No guidelines uploaded yet.</li>
           </ul>
         </div>
-        <div>
-        <button @click="goBack">Back</button>
+        <div class="mt-3 text-center">
+        <button @click="goBack" class="btn btn-secondary">Back</button>
       </div>
   
     </div>

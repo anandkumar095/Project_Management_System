@@ -1,9 +1,9 @@
 <template>
-    <div >
+    <div class="container">
       <NavBar />
+      <br>
         <h1>Document Review & Feedback Page - Instructor View</h1>
-
-      
+        <br>
           <h2>Student Submissions</h2>
           <div class="filter">
             <input type="text" placeholder="Filter" />
@@ -39,8 +39,8 @@
               </tr>
             </tbody>
           </table>
-          <div>
-        <button @click="goBack">Back</button>
+          <div class="mt-3 text-center">
+        <button @click="goBack" class="btn btn-secondary">Back</button>
       </div>
     </div>
   </template>
