@@ -1,13 +1,12 @@
-// src/router/index.js
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Login from '../components/loginPage.vue';  // Your Login component
+import Login from '../components/loginPage.vue'; // Your Login component
 import Dashboard from '../components/StudentDashboard.vue'; // Your Dashboard component (optional)
 import myteam from '../components/myTeam.vue';
+import InboxPage from "../components/InboxPage.vue";
 
 import InsDash from "@/views/InsDash.vue";
 import ProjectGuidelines from "@/views/ProjectGuidelines.vue";
-
 import MilestoneGuidelines from "@/views/MilestoneGuidelines.vue";
 import ProjectList from "@/views/ProjectList.vue";
 import DocumentReview from "@/views/DocumentReview.vue";
@@ -18,9 +17,9 @@ Vue.use(VueRouter);
 
 // Define routes
 const routes = [
-  { path: '/', component: Login },  // Login page at root
+  { path: '/', component: Login }, // Login page at root
   { path: '/dashboard', component: Dashboard },
-  {path:'/dashboard/myteam',component:myteam},  // Dashboard route (if created)
+  { path: '/dashboard/myteam', component: myteam }, // Dashboard route (if created)
   {
     path: "/instructor/:id",
     name: "instructordashboard",
@@ -31,7 +30,6 @@ const routes = [
     name: "projectguidelines",
     component: ProjectGuidelines,
   },
-
   {
     path: "/milestoneguidelines/:id",
     name: "milestoneguidelines",
@@ -52,11 +50,17 @@ const routes = [
     name: "allstudents",
     component: AllStudents,
   },
+  {
+    path: "/inbox",
+    name: "inbox",
+    component: InboxPage, // Add the InboxPage route
+  },
 ];
 
 // Create the router instance
 const router = new VueRouter({
-  routes  // Assign the routes to the Vue Router instance
+  mode: 'history', // Use history mode for cleaner URLs
+  routes, // Assign the routes to the Vue Router instance
 });
 
 export default router;
